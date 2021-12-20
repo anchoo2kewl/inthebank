@@ -22,6 +22,7 @@ or to run without docker:
 
 #### Create your own virtual environment
 ```
+$ sudo apt-get install -y python3-dev 
 $ cd inthebank/
 $ python3 -m venv env
 $ source env/bin/activate
@@ -31,6 +32,24 @@ Virtual environments are where dependencies are stored, similar to node_modules 
 #### Install your requirements
 ```
 $ pip install -r requirements.txt
+```
+
+#### Have a MySQL/MariaDB instance running with docker
+
+```shell
+docker run --name mariadb -p 3306:3306 -v {SOME_LOCAL_DIR}:/var/lib/mysql -e MARIADB_ROOT_PASSWORD={LOCAL_PASSWORD} -d mariadb:latest
+```
+
+#### Take care of the DB migrations
+
+```
+python manage.py makemigrations
+```
+
+and
+
+```
+python manage.py migrate
 ```
 
 #### Create a new superuser
